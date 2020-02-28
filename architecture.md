@@ -29,7 +29,71 @@ minimal impact to their application services, business logic and user experience
 ## Component Overview
 The following diagram is a high level, generic overview of the intended
 architecture context for this API.
+
 ![Architecture Diagram](images/vc-issuer-http-api.png)
+
+### Components
+#### 1. User Agent
+This is the software the user (or individual) is using to interact with the
+Issuer Service. This could be a web browser, a mobile App, a Kiosk, etc...
+
+#### 2. Holder / Wallet
+This is the software that is able to request/store/manage the user's DIDs,
+Verifiable Credentials, cryptographic keys, and so on. Examples include cloud
+agents, mobile Apps, web browser apps, or a combination thereof. Holders may
+make use of other software components not shown.    
+
+#### 3. Issuer Front End Services
+The Issuer service that renders to the user's agent, helping them obtain the
+credential and navigate the Issuer business logic.
+
+#### 4. Issuer-to-Holder Communication Interface
+The abstract interface for the Issuer and Holder to communicate to authenticate,
+exchange, and manage DIDs and Verifiable Credentials. Issuer Services are
+responsible for establishing a secure communication channel with the user's
+Holder. Examples include CHAPI, DIDComm, possibly a proximity wireless channel, a physical/visual barcode
+scanner, etc... . In certain deployments the communication interface is tightly
+coupled to the user interface, and in other scenarios this is managed through
+cloud agents.  
+
+#### 5. Issuer Application Services
+The Issuer collection of middleware / micro services / application servers that
+make up the Issuer Service.
+
+#### 6. Issuer Subject Database
+The database containing the Subject data the Issuer will use to generate Verifiable
+Credentials.
+
+#### 7. Verifiable Credential Issuer HTTP API Service
+An implementation of the Verifiable Credentials Issuer HTTP API (this spec) that
+is capable of generating Verifiable Credentials in accordance with the Issuer's
+policies and approved technologies (including cryptographic methods and data
+formats).
+
+#### 8. Issuer Key Vault
+A supporting cryptographic key manager service for the Issuer to protect private
+keys and secrets associated with generating Verifiable Credentials (for example,
+the Issuer DID private key).
+
+#### 9. Credential Store (optional?)
+A repository of previously Issued credentials and/or credential identifiers
+(and their current status?)
+
+#### 10. DID Resolver
+This architecture assumes the use of DIDs and Verifiable Credentials. The
+Verifiable Credential Issuer HTTP API Service will connect to a DID Resolver to
+resolve Holder DIDs to their associated DID Documents.
+
+#### 11. Public API Gateway (optional?)
+If the Issuer supports external services querying issued Credential status,
+access is controlled through a public API gateway. Securing inbound connections
+is the job of this component and outside the scope of this specification.
+
+#### 12. Verifiers and Holders (optional?)
+External entities capable of querying credential status.
+
+## API Security
+    
 
 ## Limitations and Considerations
 I'm sure its fine.
