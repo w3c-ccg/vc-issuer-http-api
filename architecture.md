@@ -13,4 +13,23 @@ cryptographic algorithms from the Issuer Services.
 
 ## Objectives
 The following capture the objectives of this API.
-1. Provide an open and consistent HTTP based API for Issuer Services to leverage   
+1. Provide an open and consistent HTTP based API for Issuer Services to leverage
+when generating Verifiable Credentials.
+1. Abstract the underlying data model, formats and proof mechanisms from the
+Issuer Services.
+1. Abstract the underlying DID methods and cryptographic algorithms from the
+Issuer Services as required.
+1. Rely on 'upstream' Issuer Services to manage connections with external
+entities (like Holder software).
+
+These objectives allow for Issuer Services to modify their underlying Verifiable
+Credential, supported DID methods, and cryptographic suites software with
+minimal impact to their application services, business logic and user experience.  
+
+## Component Overview
+The following diagram is a high level, generic overview of the intended
+architecture context for this API.
+![Architecture Diagram](images/vc-issuer-http-api.png)
+
+## Limitations and Considerations
+I'm sure its fine.
