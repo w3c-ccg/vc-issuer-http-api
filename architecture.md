@@ -93,7 +93,30 @@ is the job of this component and outside the scope of this specification.
 External entities capable of querying credential status.
 
 ## API Security
-    
+The method for securing the Internal and Public API interfaces from unauthorized
+access is currently not defined as part of the API. The Issuer Service is
+required to define and implement this security in accordance with their internal
+requirements. Recommendations include OAuth 2.0 Client Credentials, mutual TLS,
+DIDComm.     
 
 ## Limitations and Considerations
-I'm sure its fine.
+The current architecture assumes the use of DIDs in the Verifiable Credentials
+for establishing key exchange.
+
+As mentioned above, securing the API endpoints is a requirement of the Issuer
+Service.
+
+The Key Vault, Credential Store, and DID Resolver may be provided as part of
+the Issuer API implementation or supplied by the Issuer Service (this is
+implementation specific).
+
+*There may be a limitation for Credential proof formats that require a bi-lateral
+communication channel for establishing or exchanging cryptographic materials!* This
+is not the intention of the specification, and input from the community on how
+to resolve any such issues would be appreciated.
+
+## References
+* Decentralized Identifiers specification
+* Verifiable Credentials Data Model specification
+* CHAPI
+* DIDComm
