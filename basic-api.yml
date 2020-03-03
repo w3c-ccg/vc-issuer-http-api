@@ -1,0 +1,143 @@
+openapi: 3.0.0
+info:
+  description: This is an open HTTP API specification for issuing Verifiable Credentials based on the W3C Verifiable Credentials Data Model (https://www.w3.org/TR/vc-data-model/). Implementations of this API may differ in terms of which representation formats or proof formats they do or do not support. Implementations MAY choose to not support certain parts of this API (e.g. optional parts include changing and retrieving the status of a credential, or refreshing a credential).
+  version: "0.0.2"
+  title: Verifiable Credential Issuer HTTP API
+  contact:
+    email: msporny@digitalbazaar.com
+  license:
+    name: All documents in this Repository are licensed by contributors under the [W3C Software and Document License](http://www.w3.org/Consortium/Legal/copyright-software).
+paths:
+  /credentials:
+    post:
+      summary: Issues a verifiable credential and returns it in the response body.
+      operationId: issueCredential
+      description: Issues a credential and returns it in the response body. Support of this part of the API is REQUIRED for implementations.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueRequest'
+        description: Parameters for issuing the credential.
+      responses:
+        '201':
+          description: Credential was successfully issued.
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                description: The issued credential.
+              example: {
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://www.w3.org/2018/credentials/examples/v1"
+  ],
+  "id": "urn:uuid:3978344f-8596-4c3a-a978-8fcaba3903c5",
+  "type": ["VerifiablePresentation", "CredentialManagerPresentation"],
+  "verifiableCredential": [{
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://w3id.org/citizenship/v1"
+    ],
+    "id": "https://issuer.oidp.uscis.gov/credentials/83627465",
+    "type": ["VerifiableCredential", "PermanentResidentCard"],
+    "issuer": "did:v1:test:nym:z6Mko5ZVKPDsuTQN...46ecbs1u75hk2RJgAP7XU",
+    "issuanceDate": "2019-12-03T12:19:52Z",
+    "expirationDate": "2029-12-03T12:19:52Z",
+    "credentialSubject": {
+      "id": "did:example:b34ca6cd37bbf23",
+      "type": ["PermanentResident", "Person"],
+      "givenName": "JOHN",
+      "familyName": "SMITH",
+      "gender": "Male",
+      "image": "data:image/png;base64,iVBORw0KGgo...kJggg==",
+      "residentSince": "2015-01-01",
+      "lprCategory": "C09",
+      "lprNumber": "999-999-999",
+      "commuterClassification": "C1",
+      "birthCountry": "Bahamas",
+      "birthDate": "1958-07-17"
+    }
+  }],
+  "proof": [{
+    "type": "Ed25519Signature2018",
+    "created": "2020-02-25T22:03:05Z",
+    "jws": "eyJhbGciOiJFZERTQSIsImI2..hS5SPmWTFocjcDg",
+    "proofPurpose":"assertionMethod",
+    "verificationMethod":"did:key:z6Mkm8aUytv...nvKQrHB"
+  }]
+}
+        '400':
+          description: Malformed request from client.
+components:
+  schemas:
+    IssueRequest:
+      type: object
+      properties:
+        credential: 
+          type: object
+          description: The credential to be issued minus the proofs
+          example: {
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://w3id.org/citizenship/v1"
+  ],
+  "id": "https://issuer.oidp.uscis.gov/credentials/83627465",
+  "type": [
+    "VerifiableCredential",
+    "PermanentResidentCard"
+  ],
+  "issuanceDate": "2019-12-03T12:19:52Z",
+  "expirationDate": "2029-12-03T12:19:52Z",
+  "credentialSubject": {
+    "id": "did:example:b34ca6cd37bbf23",
+    "type": [
+      "PermanentResident",
+      "Person"
+    ],
+    "givenName": "JOHN",
+    "familyName": "SMITH",
+    "gender": "Male",
+    "image": "data:image/png;base64,iVBORw0KGgo...kJggg==",
+    "residentSince": "2015-01-01",
+    "lprCategory": "C09",
+    "lprNumber": "999-999-999",
+    "commuterClassification": "C1",
+    "birthCountry": "Bahamas",
+    "birthDate": "1958-07-17"
+  }
+}
+        options: 
+          type: object
+          description: Optional values that check or modify the input and modify the output of the request.
+          properties: 
+            validation:
+              type: object
+              description: Optional validation schemas to use on the input document.
+              properties:
+                type: 
+                  type: string
+                  description: The type of validation mechanism
+                  example: JsonSchema2018
+                credentialSchema: 
+                  type: string
+                  description: A link to a credential schema to use for validation.
+                  example: https://example.com/schemas/prc.json
+            issuer:
+              type: string
+              description: Optional identifier for the issuer of the credential. If this is missing, it may be pre-configured or implied by other values in the request.
+              example: did:example:ec712ebc6f1c221ebfeb1f76e12
+            output:
+              type: object
+              description: Optional values that modify the output of the request.
+              properties:
+                representation:
+                  description: Optional value to specify the credential representation format. Well-known values are "jsonld" and "json". Other values MAY be supported. If this option is not specified a default of "jsonld" MUST be assumed.
+                  example: jsonld
+                proof:
+                  type: object
+                  description: Optional settings that modify the output format for the cryptographic proof.
+                  properties:
+                    format:
+                      description: Optional value to specify the credential representation format. Well-known values are "ldproof" and "jwt". Other values MAY be supported. If this option is not specified a default of "ldproof" MUST be assumed.
+                      example: ldproof
