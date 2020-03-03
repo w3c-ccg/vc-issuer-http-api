@@ -29,11 +29,10 @@ paths:
                 description: The issued credential.
               example: {
   "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "https://www.w3.org/2018/credentials/examples/v1"
+    "https://www.w3.org/2018/credentials/v1"
   ],
   "id": "urn:uuid:3978344f-8596-4c3a-a978-8fcaba3903c5",
-  "type": ["VerifiablePresentation", "CredentialManagerPresentation"],
+  "type": ["VerifiablePresentation"],
   "verifiableCredential": [{
     "@context": [
       "https://www.w3.org/2018/credentials/v1",
@@ -74,7 +73,7 @@ components:
     IssueRequest:
       type: object
       properties:
-        credential: 
+        credential:
           type: object
           description: The credential to be issued minus the proofs
           example: {
@@ -107,19 +106,19 @@ components:
     "birthDate": "1958-07-17"
   }
 }
-        options: 
+        options:
           type: object
           description: Optional values that check or modify the input and modify the output of the request.
-          properties: 
+          properties:
             validation:
               type: object
               description: Optional validation schemas to use on the input document.
               properties:
-                type: 
+                type:
                   type: string
                   description: The type of validation mechanism
                   example: JsonSchema2018
-                credentialSchema: 
+                credentialSchema:
                   type: string
                   description: A link to a credential schema to use for validation.
                   example: https://example.com/schemas/prc.json
