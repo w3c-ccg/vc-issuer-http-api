@@ -26,7 +26,7 @@ paths:
             application/ld+json:
               schema:
                 type: object
-                description: The issued credential.
+                description: The issued Verifiable Credential, which is wrapped in a Verifiable Presentation.
               example: {
   "@context": [
     "https://www.w3.org/2018/credentials/v1"
