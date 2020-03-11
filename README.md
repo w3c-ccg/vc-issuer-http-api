@@ -10,7 +10,7 @@ This repo and specification use [Semantic Versioning 2.0.0](https://semver.org/#
 
 The API version is defined [api.yml](./api.yml).
 
-You can browse the [latest release of github](https://github.com/OR13/vc-issuer-http-api/releases).
+You can browse the [latest release of github](https://github.com/w3c-ccg/vc-issuer-http-api/releases).
 
 When implementing this specification servers must respect the `VC-API-Version` HTTP Header. 
 
