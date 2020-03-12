@@ -48,7 +48,7 @@ paths:
         - internal
       summary: Composes and issues a credential and returns it in the response body.
       operationId: createAndIssueCredential
-      description: Creates and issues a credential and returns it in the response body. Support of this part of the API is OPTIONAL for implementations.
+      description: Composes and issues a credential and returns it in the response body. Support of this part of the API is OPTIONAL for implementations.
       parameters:
         - in: query
           required: false
