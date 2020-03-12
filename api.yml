@@ -245,7 +245,7 @@ components:
               type: string
               description: The URI of a key that will be used to issue the credential. If ommited a default assertionMethod will be used.
               example: "did:web:example.com#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN"
-    CreateAndIssueCredentialRequest:
+    ComposeAndIssueCredentialRequest:
       type: object
       properties:
         issuer:
