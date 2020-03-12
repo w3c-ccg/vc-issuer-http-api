@@ -42,7 +42,7 @@ paths:
           description: invalid input!
         '500':
           description: error!
-  /credentials/createAndIssue:
+  /credentials/composeAndIssueCredential:
     post:
       tags:
         - internal
