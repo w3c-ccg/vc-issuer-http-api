@@ -47,7 +47,7 @@ paths:
       tags:
         - internal
       summary: Composes and issues a credential and returns it in the response body.
-      operationId: createAndIssueCredential
+      operationId: composeAndIssueCredential
       description: Composes and issues a credential and returns it in the response body. Support of this part of the API is OPTIONAL for implementations.
       parameters:
         - in: query
