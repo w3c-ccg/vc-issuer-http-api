@@ -213,7 +213,7 @@ components:
     IssueCredentialRequest:
       type: object
       properties:
-        payload:
+        credential:
           type: object
           description: A JSON-LD Verifiable Credential without a proof.
           example: {
