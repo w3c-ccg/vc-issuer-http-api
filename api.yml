@@ -17,7 +17,7 @@ tags:
   - name: public
     description: Public APIs facing the Holder and Verifier.
 paths:
-  /credentials:
+  /credentials/issue:
     post:
       tags:
         - internal
