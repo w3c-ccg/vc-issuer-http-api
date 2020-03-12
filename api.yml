@@ -42,13 +42,13 @@ paths:
           description: invalid input!
         '500':
           description: error!
-  /credential:
+  /credentials/createAndIssue:
     post:
       tags:
         - internal
-      summary: Constructs and issues a credential and returns it in the response body.
-      operationId: issueCredential
-      description: Constructs and issues a credential and returns it in the response body. Support of this part of the API is OPTIONAL for implementations.
+      summary: Composes and issues a credential and returns it in the response body.
+      operationId: composeAndIssueCredential
+      description: Composes and issues a credential and returns it in the response body. Support of this part of the API is OPTIONAL for implementations.
       parameters:
         - in: query
           required: false
@@ -68,7 +68,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/IssueRequest'
+              $ref: '#/components/schemasComposeAndIssueCredentialRequest'
         description: Parameters for issuing the credential.
       responses:
         '201':
@@ -82,7 +82,7 @@ paths:
           description: invalid input!
         '500':
           description: error!
-  /credential/{credentialReference}:
+  /credentials/{credentialReference}:
     get:
       tags:
         - internal
@@ -112,7 +112,7 @@ paths:
           description: error!
         '501':
           description: not supported by this implementation!
-  /credential/{credentialReference}/status:
+  /credentials/{credentialReference}/status:
     post:
       tags:
         - internal
@@ -172,7 +172,7 @@ paths:
           description: error!
         '501':
           description: not supported by this implementation!
-  /credential/{credentialReference}/refresh:
+  /credentials/{credentialReference}/refresh:
     post:
       tags:
         - public
@@ -245,7 +245,7 @@ components:
               type: string
               description: The URI of a key that will be used to issue the credential. If ommited a default assertionMethod will be used.
               example: "did:web:example.com#z6MksHh7qHWvybLg5QTPPdG2DgEjjduBDArV9EF9mRiRzMBN"
-    IssueRequest:
+    ComposeAndIssueCredentialRequest:
       type: object
       properties:
         issuer:
