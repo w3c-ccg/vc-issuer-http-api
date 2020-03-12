@@ -68,7 +68,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemasComposeAndIssueCredentialRequest'
+              $ref: '#/components/schemas/ComposeAndIssueCredentialRequest'
         description: Parameters for issuing the credential.
       responses:
         '201':
