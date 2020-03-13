@@ -5,7 +5,7 @@ servers:
     url: https://virtserver.swaggerhub.com/danubetech/credential-issuer/0.0.1
 info:
   description: This is an experimental open API specification for issuing digital credentials based on standards such as the Verifiable Credentials Data Model (https://www.w3.org/TR/vc-data-model/), JWT (https://tools.ietf.org/html/rfc7519), and Open Badges (https://openbadges.org/). Implementations are expected to change significantly and implementers that are not directly involved in the work are strongly urged to not implement this API. Implementations of this API may differ in terms of which data formats or proof formats they do or do not support. Implementations may choose to not support certain parts of this API (e.g. optional parts include changing and retrieving the status of a credential, or refreshing a credential). 
-  version: "0.0.2"
+  version: "0.0.3"
   title: Credential Issuer API
   contact:
     email: markus@danubetech.com
@@ -17,7 +17,7 @@ tags:
   - name: public
     description: Public APIs facing the Holder and Verifier.
 paths:
-  /credentials/issueCredential:
+  /credentials:
     post:
       tags:
         - internal
@@ -42,13 +42,13 @@ paths:
           description: invalid input!
         '500':
           description: error!
-  /credentials/composeAndIssueCredential:
+  /credentials/compose:
     post:
       tags:
         - internal
-      summary: Composes and issues a credential and returns it in the response body.
-      operationId: composeAndIssueCredential
-      description: Composes and issues a credential and returns it in the response body. Support of this part of the API is OPTIONAL for implementations.
+      summary: Composes a credential and returns it in the response body.
+      operationId: composeCredential
+      description: Composes a credential and returns it in the response body. Support of this part of the API is OPTIONAL for implementations.
       parameters:
         - in: query
           required: false
@@ -68,16 +68,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ComposeAndIssueCredentialRequest'
-        description: Parameters for issuing the credential.
+              $ref: '#/components/schemas/ComposeCredentialRequest'
+        description: Parameters for composing the credential.
       responses:
         '201':
-          description: credential successfully issued!
+          description: credential successfully composed!
           content:
             application/json:
               schema:
                 type: object
-                description: The issued credential. This SHOULD include a reference or ID that can be used later for other parts of the API, e.g. changing and retrieving the status of the credential, or refreshing the credential.
+                description: The composed credential. This composed credential can be issued by using the issue credential operation.
         '400':
           description: invalid input!
         '500':
