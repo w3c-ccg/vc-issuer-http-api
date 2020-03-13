@@ -4,7 +4,7 @@ This document is used to track design choices made in the development of [api.ym
 
 To the best of our ability we are attempting to follow [restfulapi.net](https://restfulapi.net/).
 
-In cases where excessive optionality is allowed, or where consensus must needed to be reached are recorded, we will document our decisions here.
+In cases where excessive optionality is allowed, or where consensus is needed, we will document our decisions here. The working decisions documented here so far should be understood in the context of an unstable API, i.e., the API may change in substantive ways in the future.
 
 ## API Versioning
 
