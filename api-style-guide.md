@@ -12,4 +12,8 @@ We have decided to use HTTP Headers to version the API.
 
 ## Regarding Collections and Controllers
 
-We are debating the appropriatness of both. See: [resource-naming](https://restfulapi.net/resource-naming/)
+We are debating the appropriatness of both. 
+
+See: 
+- [Agree to API Style Guide](https://github.com/w3c-ccg/vc-issuer-http-api/issues/41)
+- [resource-naming](https://restfulapi.net/resource-naming/)
